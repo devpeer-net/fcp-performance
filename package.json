@@ -1,0 +1,20 @@
+{
+  "name": "cri_metrics",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chrome-launcher": "^1.1.2",
+    "chrome-remote-interface": "^0.33.2",
+    "commander": "^12.1.0",
+    "csv-writer": "^1.6.0",
+    "csvtojson": "^2.0.10",
+    "systeminformation": "^5.22.11"
+  }
+}
