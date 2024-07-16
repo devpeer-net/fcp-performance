@@ -66,9 +66,10 @@ const measureFCPPerformance = async (client, url) => {
 const runTest = async (options) => {
   const browserArgsList = options.browserArgs.split(' ');
   debug("browserArgsList", browserArgsList);
+  let chrome = null;
   if (options.launchChrome) {
   debug("Launching chrome");
-    const chrome = await ChromeLauncher.launch({
+    chrome = await ChromeLauncher.launch({
       port: options.port,
       chromeFlags: browserArgsList
     });
@@ -107,7 +108,9 @@ const runTest = async (options) => {
   } catch (error) {
     console.error(error);
   } finally {
-    chrome.kill();
+    if (chrome) {
+      chrome.kill();
+    }
   }
 }
 
