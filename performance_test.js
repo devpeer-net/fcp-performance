@@ -89,10 +89,12 @@ const runTest = async (options) => {
     const testsStartTime = new Date().toISOString();
     const urls = await getUrls(options.input);
     let measurements = [];
-    for (const url of urls) {
-      const startTime = new Date().toISOString();
-      const fcpTime = await measureFCPPerformance(client, url);
-      measurements.push(new Measurement(url, fcpTime, startTime));
+    for (let i = 0; i < options.repeat; i++) {
+      for (const url of urls) {
+        const startTime = new Date().toISOString();
+        const fcpTime = await measureFCPPerformance(client, url);
+        measurements.push(new Measurement(url, fcpTime, startTime));
+      }
     }
 
     // Save system information for the test run.
@@ -126,7 +128,8 @@ program
     .option('-b, --browser-args <args>', 'Arguments to pass to the browser instance. Default is "--disable-gpu --no-sandbox --headless"', '--disable-gpu --no-sandbox --headless')
     .option('-l, --launch-chrome', 'Launch Chrome in a separate process. Default is true', true)
     .option('-h, --host <hostname>', 'Hostname to use to connect to Chrome DevTools. Default is localhost', 'localhost')
-    .option('-p, --port <port>', 'Port to use to connect to Chrome DevTools. Default is 9222', 9222);
+    .option('-p, --port <port>', 'Port to use to connect to Chrome DevTools. Default is 9222', 9222)
+    .option('-r, --repeat <n>', 'Number of times to repeat the test. Default is 1', 1);
 
 // Parse the command line arguments
 program.parse(process.argv);
