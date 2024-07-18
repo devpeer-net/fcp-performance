@@ -6,6 +6,7 @@ const debug = Debug('fcp-performance');
 import fs from 'node:fs';
 import * as si from 'systeminformation';
 import { program } from 'commander';
+import { resolve } from 'node:path';
 
 class TestRun {
   constructor(productVersion, measurements, datetime, osInfo, browserArgs) {
@@ -55,8 +56,8 @@ const measureFCPPerformance = async (client, url) => {
       awaitPromise: true
     });
     debug("fcp", startTime);
+    await Page.stopLoading();
     return startTime.result.value;
-
   } catch (error) {
     debug(error);
     return Infinity;
@@ -93,6 +94,7 @@ const runTest = async (options) => {
       for (const url of urls) {
         const startTime = new Date().toISOString();
         const fcpTime = await measureFCPPerformance(client, url);
+        console.log(`FCP for ${url} is ${fcpTime}ms`);
         measurements.push(new Measurement(url, fcpTime, startTime));
       }
     }
