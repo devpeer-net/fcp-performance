@@ -2,6 +2,8 @@
 
 This script, `performance_test.js`, is designed to measure the page rendering performance of a web browser. The script measures the First Contentful Paint (FCP), which is a key performance metric indicating the time at which the first text or image is painted on the screen aster navigating to a web page.
 
+The tool can be used to benchmark web rendering performance on specific devices: desktop, mobile, embedded (IoT).
+
 ## Features
 
 - Measures First Contentful Paint (FCP) to evaluate the performance of a web browser in rendering a webpage.
